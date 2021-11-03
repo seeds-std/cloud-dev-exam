@@ -1,6 +1,6 @@
 # cloud-dev-exam
 
-クラウド事業部採用試験リポジトリ
+クラウド事業部プログラマー採用試験リポジトリ
 
 ## 依存アプリケーション
 
@@ -23,17 +23,17 @@ slim_1   | [Wed Nov  3 17:45:32 2021] PHP 8.0.12 Development Server (http://0.0.
 
 ## アプリケーション構成
 
-本アプリケーションは JSON を返す REST API です。
+本アプリケーションは JSON を返す REST API です。  
 
-*エンドポイント*
+*エンドポイント*  
 - GET /users
 - GET /exams
 - GET /scores
 
-URLは http://localhost:8080 から確認できます。
+URLは http://localhost:8080 から確認できます。  
 
-*ディレクトリ構成*
-主に本試験において見るべきファイルについてみ説明します。
+*ディレクトリ構成*  
+主に本試験において見るべきファイルについてのみ説明します。  
 
 ```
 .
@@ -64,7 +64,7 @@ URLは http://localhost:8080 から確認できます。
 1. [GET /users] レスポンスから id=1 のユーザーを除外してください。
 2. [GET /users] レスポンスのユーザー数を 10 にしてください。
 3. [GET /exams] レスポンスの level の値を LEVEL_LABELS の name の値に変更してください。
-4. [GET /scores] レスポンスに user_id に対応する name と exam_id に対応する name を追加してください。キー名はそれぞれ user_name, exam_name とし末尾に追加してください。
+4. [GET /scores] レスポンスに user_id と exam_id に対応する name を追加してください。キー名はそれぞれ user_name, exam_name とし末尾に追加してください。
 
 ## テスト
 
