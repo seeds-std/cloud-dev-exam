@@ -1,0 +1,45 @@
+version: '3.7'
+
+volumes:
+  mysql_data:
+    driver: local
+
+services:
+  slim:
+    build:
+      dockerfile: docker/slim/Dockerfile
+    working_dir: /var/www
+    entrypoint:
+      - dockerize
+      - -timeout
+      - 60s
+      - -wait
+      - tcp://mysql:3306
+    depends_on:
+      - mysql
+    command: php -S 0.0.0.0:8080 -t public
+    environment:
+      docker: "true"
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: cloud_dev_exam
+      MYSQL_USER: cloud_dev_exam
+      MYSQL_PASSWORD: cloud_dev_exam
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/var/www
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cloud_dev_exam
+      MYSQL_USER: cloud_dev_exam
+      MYSQL_PASSWORD: cloud_dev_exam
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/db:/docker-entrypoint-initdb.d
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./logs/mysql:/var/log/mysql
+      - mysql_data:/var/lib/mysql
