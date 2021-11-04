@@ -65,6 +65,7 @@ URLは http://localhost:8080 から確認できます。
 2. [GET /users] レスポンスのユーザー数を 10 にしてください。
 3. [GET /exams] レスポンスの level の値を LEVEL_LABELS の name の値に変更してください。
 4. [GET /scores] レスポンスに user_id と exam_id に対応する name を追加してください。キー名はそれぞれ user_name, exam_name とし末尾に追加してください。
+5. 後述のテストが通ること。
 
 ## テスト
 
