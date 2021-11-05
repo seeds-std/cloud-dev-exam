@@ -7,7 +7,7 @@ volumes:
 services:
   slim:
     build:
-      dockerfile: docker/slim/Dockerfile
+      context: ./docker/slim/
     working_dir: /var/www
     entrypoint:
       - dockerize
