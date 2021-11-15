@@ -10,7 +10,7 @@
 
 *docker の起動*
 
-```shwll
+```shell
 $ docker compose up
 ```
 
