@@ -10,7 +10,6 @@ use Psr\Http\Message\ResponseInterface as Response;
  */
 final class ExamsAction extends Action
 {
-    // @phpstan-ignore classConstant.unused (課題3で使うレベル名の対応表)
     private const LEVEL_LABELS = [
         [
             'id' => 1,

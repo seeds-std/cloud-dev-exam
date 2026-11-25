@@ -3,3 +3,8 @@ parameters:
   phpVersion: 80500
   paths:
     - src
+  ignoreErrors:
+    -
+      identifier: classConstant.unused
+      path: src/Application/Actions/ExamsAction.php
+      reportUnmatched: false
