@@ -5,7 +5,6 @@ namespace App\Application\Handlers;
 
 use App\Application\Actions\ActionError;
 use App\Application\Actions\ActionPayload;
-use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpException;
@@ -15,7 +14,6 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpNotImplementedException;
 use Slim\Exception\HttpUnauthorizedException;
 use Slim\Handlers\ErrorHandler as SlimErrorHandler;
-use Throwable;
 
 class HttpErrorHandler extends SlimErrorHandler
 {
@@ -50,10 +48,7 @@ class HttpErrorHandler extends SlimErrorHandler
             }
         }
 
-        if (!($exception instanceof HttpException)
-            && $exception instanceof Throwable
-            && $this->displayErrorDetails
-        ) {
+        if (!($exception instanceof HttpException) && $this->displayErrorDetails) {
             $error->setDescription($exception->getMessage());
         }
 

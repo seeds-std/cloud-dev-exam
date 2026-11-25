@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\Application\Actions\User;
+namespace Tests\Application\Actions;
 
 use App\Application\Actions\ActionPayload;
 use Tests\TestCase;
 
 class ActionTest extends TestCase
 {
-    public function testUsersAction()
+    public function testUsersAction(): void
     {
         $app = $this->getAppInstance();
 
@@ -68,7 +68,7 @@ class ActionTest extends TestCase
         $this->assertEquals($serializedPayload, $payload, 'レスポンスが期待値と一致しません。');
     }
 
-    public function testExamsAction()
+    public function testExamsAction(): void
     {
         $app = $this->getAppInstance();
 
@@ -127,7 +127,7 @@ class ActionTest extends TestCase
         $this->assertEquals($serializedPayload, $payload, 'レスポンスが期待値と一致しません。');
     }
 
-    public function testScoresAction()
+    public function testScoresAction(): void
     {
         $app = $this->getAppInstance();
 

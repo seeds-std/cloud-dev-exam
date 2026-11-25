@@ -4,21 +4,21 @@
 
 ## 依存アプリケーション
 
-- docker for desktop
+- Docker Desktop（アプリケーションはコンテナ内の PHP 8.5 で動作します）
 
 ## 環境構築
 
 *docker の起動*
 
 ```shell
-$ docker compose up
+$ docker compose up --build
 ```
 
 mysql と slim アプリケーションの起動が始まります。  
 以下の様なログが出力されたら準備完了です。
 
 ```shell
-slim_1   | [Wed Nov  3 17:45:32 2021] PHP 8.0.12 Development Server (http://0.0.0.0:8080) started
+slim-1  | [Wed Nov 25 10:41:22 2026] PHP 8.5.12 Development Server (http://0.0.0.0:8080) started
 ```
 
 ## アプリケーション構成

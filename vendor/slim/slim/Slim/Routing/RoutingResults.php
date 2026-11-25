@@ -12,55 +12,36 @@ namespace Slim\Routing;
 
 use Slim\Interfaces\DispatcherInterface;
 
-use function rawurldecode;
-
+/** @api */
 class RoutingResults
 {
     public const NOT_FOUND = 0;
     public const FOUND = 1;
     public const METHOD_NOT_ALLOWED = 2;
 
-    /**
-     * @var DispatcherInterface
-     */
-    protected $dispatcher;
+    protected DispatcherInterface $dispatcher;
+
+    protected string $method;
+
+    protected string $uri;
 
     /**
-     * @var string
-     */
-    protected $method;
-
-    /**
-     * @var string
-     */
-    protected $uri;
-
-    /**
-     * @var int
      * The status is one of the constants shown above
      * NOT_FOUND = 0
      * FOUND = 1
      * METHOD_NOT_ALLOWED = 2
      */
-    protected $routeStatus;
+    protected int $routeStatus;
+
+    protected ?string $routeIdentifier = null;
 
     /**
-     * @var null|string
+     * @var array<string, string>
      */
-    protected $routeIdentifier;
+    protected array $routeArguments;
 
     /**
-     * @var string[]
-     */
-    protected $routeArguments;
-
-    /**
-     * @param DispatcherInterface $dispatcher
-     * @param string              $method
-     * @param string              $uri
-     * @param int                 $routeStatus
-     * @param string|null         $routeIdentifier
-     * @param string[]            $routeArguments
+     * @param array<string, string> $routeArguments
      */
     public function __construct(
         DispatcherInterface $dispatcher,
@@ -78,62 +59,43 @@ class RoutingResults
         $this->routeArguments = $routeArguments;
     }
 
-    /**
-     * @return DispatcherInterface
-     */
     public function getDispatcher(): DispatcherInterface
     {
         return $this->dispatcher;
     }
 
-    /**
-     * @return string
-     */
     public function getMethod(): string
     {
         return $this->method;
     }
 
-    /**
-     * @return string
-     */
     public function getUri(): string
     {
         return $this->uri;
     }
 
-    /**
-     * @return int
-     */
     public function getRouteStatus(): int
     {
         return $this->routeStatus;
     }
 
-    /**
-     * @return null|string
-     */
     public function getRouteIdentifier(): ?string
     {
         return $this->routeIdentifier;
     }
 
     /**
-     * @param bool $urlDecode
-     * @return string[]
+     * @note Arguments are captured from a path that RouteResolver has already decoded,
+     * so we return them as-is with no URL decoding.
+     *
+     * @param bool $urlDecode Ignored. Retained for backwards compatibility.
+     * @return array<string, string>
+     *
+     * @psalm-suppress PossiblyUnusedParam
      */
     public function getRouteArguments(bool $urlDecode = true): array
     {
-        if (!$urlDecode) {
-            return $this->routeArguments;
-        }
-
-        $routeArguments = [];
-        foreach ($this->routeArguments as $key => $value) {
-            $routeArguments[$key] = rawurldecode($value);
-        }
-
-        return $routeArguments;
+        return $this->routeArguments;
     }
 
     /**

@@ -2,8 +2,20 @@
 	"name": "phpstan/phpstan",
 	"description": "PHPStan - PHP Static Analysis Tool",
 	"license": ["MIT"],
+  "authors": [
+    {
+      "name": "Ondřej Mirtes"
+    },
+    {
+      "name": "Markus Staab"
+    },
+    {
+      "name": "Vincent Langlet"
+    }
+  ],
+	"keywords": ["dev", "static analysis"],
 	"require": {
-		"php": "^7.1|^8.0"
+		"php": "^7.4|^8.0"
 	},
 	"conflict": {
 		"phpstan/phpstan-shim": "*"
@@ -12,12 +24,19 @@
 		"phpstan",
 		"phpstan.phar"
 	],
-	"extra": {
-		"branch-alias": {
-			"dev-master": "0.12-dev"
-		}
-	},
 	"autoload": {
 		"files": ["bootstrap.php"]
+	},
+    "source": {
+        "type": "",
+        "url": "",
+        "reference": ""
+    },
+	"support": {
+		"issues": "https://github.com/phpstan/phpstan/issues",
+		"forum": "https://github.com/phpstan/phpstan/discussions",
+		"source": "https://github.com/phpstan/phpstan-src",
+		"docs": "https://phpstan.org/user-guide/getting-started",
+		"security": "https://github.com/phpstan/phpstan/security/policy"
 	}
 }
