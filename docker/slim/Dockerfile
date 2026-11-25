@@ -11,7 +11,14 @@ RUN apt-get update \
 
 ARG DOCKERIZE_VERSION=v0.16.0
 ARG TARGETARCH
-RUN curl -fsSL "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-${TARGETARCH}-${DOCKERIZE_VERSION}.tar.gz" \
+RUN arch="${TARGETARCH:-$(dpkg --print-architecture)}"; \
+    case "$arch" in \
+        amd64|arm64) ;; \
+        *) \
+            echo "Unsupported architecture for dockerize: $arch (supported: amd64, arm64)" >&2; \
+            exit 1 ;; \
+    esac; \
+    curl -fsSL "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-${arch}-${DOCKERIZE_VERSION}.tar.gz" \
     -o /tmp/dockerize.tar.gz \
     && tar -C /usr/local/bin -xzf /tmp/dockerize.tar.gz \
     && rm /tmp/dockerize.tar.gz
