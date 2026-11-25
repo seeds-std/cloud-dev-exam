@@ -1,14 +1,17 @@
-FROM php:8.0
+FROM php:8.5-cli-bookworm
 
 EXPOSE 8080
 
 WORKDIR /var/www
 
-RUN apt-get update && apt-get install -y wget
-RUN docker-php-ext-install pdo_mysql
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends unzip \
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install pdo_mysql
 
-ENV DOCKERIZE_VERSION v0.6.1
-ARG DOCKERIZE_ARCH=amd64
-RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-$DOCKERIZE_ARCH-$DOCKERIZE_VERSION.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-linux-$DOCKERIZE_ARCH-$DOCKERIZE_VERSION.tar.gz \
-    && rm dockerize-linux-$DOCKERIZE_ARCH-$DOCKERIZE_VERSION.tar.gz
+ARG DOCKERIZE_VERSION=v0.16.0
+ARG TARGETARCH
+RUN curl -fsSL "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-${TARGETARCH}-${DOCKERIZE_VERSION}.tar.gz" \
+    -o /tmp/dockerize.tar.gz \
+    && tar -C /usr/local/bin -xzf /tmp/dockerize.tar.gz \
+    && rm /tmp/dockerize.tar.gz
